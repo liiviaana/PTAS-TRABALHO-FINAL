@@ -45,6 +45,16 @@ class ProdutoController {
         })
     }
 
+    buscarTodosProdutos = async (req, res) =>  {
+        const produtos = await Produto.find()
+
+        res.status(200).json({
+            error: false,
+            message: 'Produtos buscados',
+            produtos
+        })
+    }
+
     editarPrecoProduto = async (req, res) => {
         const { id } = req.params
         const { preco } = req.body

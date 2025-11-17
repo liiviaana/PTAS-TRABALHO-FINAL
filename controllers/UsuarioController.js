@@ -11,6 +11,15 @@ class UsuarioController {
             })
         }
 
+        const possivelUsuario = await Usuario.findOne({ email })
+
+        if (possivelUsuario) {
+            return res.status(409).json({
+                error: true,
+                message: 'Email em uso'
+            })
+        }
+
         const usuario = new Usuario({
             nome,
             email,
