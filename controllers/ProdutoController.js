@@ -29,7 +29,7 @@ class ProdutoController {
     buscarProdutoPorId = async (req, res) => {
         const { id } = req.params
 
-        const produto = Produto.findById(id)
+        const produto = await Produto.findById(id)
 
         if (!produto) {
             return res.status(404).json({
@@ -45,12 +45,19 @@ class ProdutoController {
         })
     }
 
-    editarQuantidadeProduto = async (req, res) => {
+    editarPrecoProduto = async (req, res) => {
         const { id } = req.params
-        const { quantidade } = req.body
+        const { preco } = req.body
 
-        const response = Produto.findByIdAndUpdate(id, {
-            quantidade
+        if (!preco) {
+            return res.status(422).json({
+                error: true,
+                message: "Preço inválido"
+            })
+        }
+
+        const response = await Produto.findByIdAndUpdate(id, {
+            preco
         })
 
         if (!response) {
@@ -66,12 +73,19 @@ class ProdutoController {
         })
     }
 
-    editarPrecoProduto = async (req, res) => {
+    editarQuantidadeProduto = async (req, res) => {
         const { id } = req.params
-        const { preco } = req.body
+        const { quantidade } = req.body
 
-        const response = Produto.findByIdAndUpdate(id, {
-            preco
+        if (!quantidade) {
+            return res.status(422).json({
+                error: true,
+                message: "Quantidade inválido"
+            })
+        }
+
+        const response = await Produto.findByIdAndUpdate(id, {
+            quantidade
         })
 
         if (!response) {
