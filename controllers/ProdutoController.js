@@ -102,7 +102,7 @@ class ProdutoController {
         res.status(200).json({
             error: false,
             message: 'Produto deletado',
-            produtoDeletadoz: response
+            produtoDeletado: response
         })
     }
 }

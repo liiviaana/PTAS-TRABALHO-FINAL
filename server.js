@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import usuarioRoutes from './routes/usuarioRoute.js';
-import produtoRoute from './routes/produtoRoute.js';
+import usuarioRoutes from './routes/usuarioRoutes.js';
+import produtoRoutes from './routes/produtoRoutes.js';
 
 const app = express()
 app.use(express.json())
@@ -13,7 +13,7 @@ mongoose.connect('mongodb://localhost:27017/database-sitema-de-vendas').then(() 
 })
 
 app.use('/usuario', usuarioRoutes)
-app.use('/produto', produtoRoute)
+app.use('/produto', produtoRoutes)
 
 app.listen(3000, () => {
     console.log('Servidor rodando na porta 3000')
