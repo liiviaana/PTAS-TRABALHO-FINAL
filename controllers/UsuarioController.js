@@ -1,25 +1,6 @@
 import Usuario from '../models/usuarioModel.js'
 
 class UsuarioController {
-    buscarUsuarioPorEmail = async (req, res) => {
-        const { email } = req.params
-
-        const usuario = await Usuario.findOne({ email })
-
-        if (!usuario) {
-            return res.status(404).json({
-                error: true,
-                mensagem: 'Usuário não encontrado'
-            })
-        }
-
-        res.json({
-            error: false,
-            message: 'Usuário encontrado',
-            usuario
-        })
-    }
-
     criarUsuario = async (req, res) => {
         const { nome, email, senha } = req.body;
 
@@ -45,6 +26,25 @@ class UsuarioController {
         )
     }
 
+    buscarUsuarioPorEmail = async (req, res) => {
+        const { email } = req.params
+
+        const usuario = await Usuario.findOne({ email })
+
+        if (!usuario) {
+            return res.status(404).json({
+                error: true,
+                mensagem: 'Usuário não encontrado'
+            })
+        }
+
+        res.status(200).json({
+            error: false,
+            message: 'Usuário encontrado',
+            usuario
+        })
+    }
+
     editarUsuarioPorEmail = async (req, res) => {
         const { email } = req.params
         const { nome } = req.body
@@ -67,7 +67,7 @@ class UsuarioController {
 
         res.status(200).json({
             error: false,
-            message: 'Usuário editado'
+            message: 'Usuário atualizado'
         })
     }
 
